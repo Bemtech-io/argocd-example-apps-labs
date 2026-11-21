@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-check
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  template:
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command: ["sh", "-c", "echo Running some verifications && sleep 10"]
+      restartPolicy: Never
+  backoffLimit: 4
